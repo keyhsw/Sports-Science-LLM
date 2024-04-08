@@ -20,29 +20,7 @@ from transformers.generation.utils import LogitsProcessorList, StoppingCriteriaL
 from transformers.utils import logging
 
 from transformers import AutoTokenizer, AutoModelForCausalLM, AutoModel  # isort: skip
-from openxlab.model import download
 import os
-
-import subprocess
-
-def install_git_lfs():
-    try:
-        # 使用 subprocess 执行安装 Git LFS 的命令
-        subprocess.run(["apt-get", "update"], capture_output=True, text=True)
-        result = subprocess.run(["apt-get", "install", "git-lfs"], capture_output=True, text=True)
-        
-        # 检查命令执行结果
-        if result.returncode == 0:
-            print("Git LFS installation successful.")
-        else:
-            print("Git LFS installation failed.")
-            print("Error message:", result.stderr)
-    except Exception as e:
-        print("An error occurred during installation:", e)
-
-# 调用函数执行安装操作
-install_git_lfs()
-
 
 logger = logging.get_logger(__name__)
 
