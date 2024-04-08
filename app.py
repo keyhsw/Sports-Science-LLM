@@ -23,10 +23,29 @@ from transformers import AutoTokenizer, AutoModelForCausalLM, AutoModel  # isort
 from openxlab.model import download
 import os
 
+import subprocess
+
+def install_git_lfs():
+    try:
+        # 使用 subprocess 执行安装 Git LFS 的命令
+        result = subprocess.run(["sudo", "apt-get", "install", "git-lfs"], capture_output=True, text=True)
+        
+        # 检查命令执行结果
+        if result.returncode == 0:
+            print("Git LFS installation successful.")
+        else:
+            print("Git LFS installation failed.")
+            print("Error message:", result.stderr)
+    except Exception as e:
+        print("An error occurred during installation:", e)
+
+# 调用函数执行安装操作
+install_git_lfs()
+
+
 logger = logging.get_logger(__name__)
 
 base_path = '/home/xlab-app-center/model'
-os.system('git lfs install')
 os.system(f'git clone https://code.openxlab.org.cn/leonliuzx/Sports_Science_LLM_Fitness_Trainer.git {base_path}')
 os.system(f'cd {base_path} && git lfs pull')
 
