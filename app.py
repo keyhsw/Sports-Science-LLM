@@ -28,6 +28,7 @@ import subprocess
 def install_git_lfs():
     try:
         # 使用 subprocess 执行安装 Git LFS 的命令
+        subprocess.run(["apt-get", "update"], capture_output=True, text=True)
         result = subprocess.run(["apt-get", "install", "git-lfs"], capture_output=True, text=True)
         
         # 检查命令执行结果
